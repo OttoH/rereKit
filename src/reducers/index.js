@@ -1,7 +1,11 @@
 
 import { combineReducers } from 'redux'
+import { routerReducer } from 'react-router-redux'
+import auth from './auth'
 import tracks from './tracks'
 
 export default combineReducers({
-    tracks
+    auth,
+    tracks,
+    routing: routerReducer
 })

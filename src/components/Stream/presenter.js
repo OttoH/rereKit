@@ -2,31 +2,33 @@
 import React from 'react';
 
 class Stream extends React.Component{
-    constructor() {
-        super();
-        this.state = {};
-    }
 
     render () {
-        const { tracks = [] } = this.props;
+        const { user, tracks = [], onAuth } = this.props;
 
         return (
             <div>
-          {
-            tracks.map((track, key) => {
-              return (
-                <div className="track" key={key}>
-                  {track.title}
-                  <button onClick={() => this.setState({ [key]: !this.state[key] })} type="button">
-                    { this.state[key] ? 'Dislike' : 'Like' }
-                  </button>
+                <div>
+                {
+                  user ?
+                    <div>{user.username}</div> :
+                    <button onClick={onAuth} type="button">Login</button>
+                }
                 </div>
-              );
-            })
-          }
-        </div>
+                <div>
+                {
+                    tracks.map((track, key) => {
+                      return (
+                        <div className="track" key={key}>
+                          {track.title}
+                        </div>
+                      );
+                    })
+                }
+                </div>
+            </div>
         );
     }
 }
 
-export default Stream;
+export default Stream
