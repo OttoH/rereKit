@@ -4,7 +4,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { Provider } from 'react-redux'
 import configureStore from './stores/configureStore'
-import * as actions from './actions'
+import { actionCreators as tracksActionCreator } from './ducks/tracks'
 import App from './components/App/presenter'
 import Callback from './components/Callback'
 import Stream from './components/Stream'
@@ -29,7 +29,7 @@ const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store)
 
 // demostrate initial
-store.dispatch(actions.setTracks(tracks))
+store.dispatch(tracksActionCreator.doSetTracks(tracks))
 
 ReactDOM.render(
     <Provider store={store}>

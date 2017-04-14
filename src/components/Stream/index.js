@@ -5,7 +5,7 @@ import Stream from './presenter'
 
 // bind actions
 import { bindActionCreators } from 'redux'
-import * as actions from '../../actions'
+import { actionCreators as authActionCreators } from '../../ducks/auth';
 
 const mapStateToProps = (state) => {
     return {
@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 const mapDispathToProps = (dispatch) => {
     return (
         {
-            onAuth: bindActionCreators(actions.auth, dispatch)
+            onAuth: bindActionCreators(authActionCreators.doAuth, dispatch)
         }
     )
 }
