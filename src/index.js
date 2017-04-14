@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { AppContainer } from 'react-hot-loader';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { Provider } from 'react-redux'
@@ -10,6 +11,8 @@ import Callback from './components/Callback'
 import Stream from './components/Stream'
 import { CLIENT_ID, REDIRECT_URI } from './constants/auth'
 
+import './style';
+
 // soundcloud  initialize
 import SoundCloud from 'soundcloud'
 SoundCloud.initialize({ client_id: CLIENT_ID, redirect_uri: REDIRECT_URI })
@@ -19,7 +22,7 @@ const tracks = [
         title: 'coldplay'
     },
     {
-        title: 'green day'
+        title: 'green days'
     }
 ]
 
@@ -32,6 +35,7 @@ const history = syncHistoryWithStore(browserHistory, store)
 store.dispatch(tracksActionCreator.doSetTracks(tracks))
 
 ReactDOM.render(
+    <AppContainer>
     <Provider store={store}>
         <Router history={history}>
             <Route path="/" component={App}>
@@ -40,8 +44,15 @@ ReactDOM.render(
                 <Route path="/callback" component={Callback} />
             </Route>
         </Router>
-    </Provider>,
+    </Provider>
+    </AppContainer>,
     document.getElementById('app')
 )
 
-module.hot.accept()
+//module.hot.accept()
+
+if (module.hot) {
+  module.hot.accept('./components/App/presenter', () => {
+    render(App)
+  });
+}

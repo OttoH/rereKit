@@ -1,11 +1,11 @@
 
 import React from 'react';
+import style from './style';
 
 class Stream extends React.Component{
 
     render () {
         const { user, tracks = [], onAuth } = this.props;
-
         return (
             <div>
                 <div>
@@ -19,7 +19,8 @@ class Stream extends React.Component{
                 {
                     tracks.map((track, key) => {
                       return (
-                        <div className="track" key={key}>
+                        <div className={'track ' + style.trackitem}
+                         key={key}>
                           {track.title}
                         </div>
                       );
